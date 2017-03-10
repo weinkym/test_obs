@@ -2534,8 +2534,13 @@ void OBSBasic::doTest()
             data.visible = true;
             obs_scene_atomic_update(scene, AddSource0, &data);
 
+
+
             auto func = [](obs_scene_t *scene, obs_sceneitem_t *item, void *param)
             {
+                OBSBasic *main = static_cast<OBSBasic*>(param);
+                uint64_t cx     = config_get_uint(main->Config(),  "Video", "BaseCX");
+                uint64_t cy       = config_get_uint(main->Config(), "Video", "BaseCY");
               //  if (!obs_sceneitem_selected(item))
                  //   return true;
 
@@ -2549,7 +2554,8 @@ void OBSBasic::doTest()
                 obs_transform_info info;
                 obs_sceneitem_get_info(item,&info);
 //                vec2_set(&(info.scale),1920,1080);
-                vec2_set(&(info.bounds),1920,1080);
+
+                vec2_set(&(info.bounds),cx,cy);
                 info.bounds_type = OBS_BOUNDS_STRETCH;
 //                obs_sceneitem_set_info(item,&info);
                 qDebug()<<QString("on_actionCopyTransform_triggered left=%1,%2").arg(info.scale.x).arg(info.scale.y);

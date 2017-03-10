@@ -105,7 +105,6 @@ class OBSBasic : public OBSMainWindow {
     };
 
 private:
-    void doTest();
     obs_frontend_callbacks *api = nullptr;
 
     std::vector<VolControl*> volumes;
@@ -168,6 +167,7 @@ private:
     QPointer<QAction>         exit;
     QPointer<QMenu>           trayMenu;
 
+    void doTest();
     void          DrawBackdrop(float cx, float cy);
 
     void          SetupEncoders();
