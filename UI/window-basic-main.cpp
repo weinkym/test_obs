@@ -2547,11 +2547,12 @@ void OBSBasic::doTest()
                 crop.right=1200;
 //                obs_sceneitem_set_crop(item, &crop);
                 obs_transform_info info;
-                vec2_set(&(info.bounds),300,300);
                 obs_sceneitem_get_info(item,&info);
-              //  info.bounds_type = OBS_BOUNDS_STRETCH;
+//                vec2_set(&(info.scale),1920,1080);
+                vec2_set(&(info.bounds),1920,1080);
+                info.bounds_type = OBS_BOUNDS_STRETCH;
 //                obs_sceneitem_set_info(item,&info);
-                qDebug()<<QString("on_actionCopyTransform_triggered left=%1,%2,=%3,=%4").arg(crop.left).arg(crop.right).arg(crop.top).arg(crop.bottom);
+                qDebug()<<QString("on_actionCopyTransform_triggered left=%1,%2").arg(info.scale.x).arg(info.scale.y);
 //                obs_sceneitem_defer_update_end(item);
 
                 obs_sceneitem_defer_update_begin(item);
@@ -4470,7 +4471,7 @@ void OBSBasic::on_streamButton_clicked()
             if (button == QMessageBox::No)
                 return;
         }
-
+        ResetOutputs();
         StartStreaming();
     }
 }

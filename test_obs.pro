@@ -13,7 +13,7 @@ TEMPLATE = app
 
 DESTDIR  = ./debug/bin/32bit
 
-include(obs.pri)
+include(./obs/obs.pri)
 INCLUDEPATH += ./UI
 INCLUDEPATH += ./UI/obs-frontend-api
 
