@@ -1284,8 +1284,8 @@ static int run_program(fstream &logFile, int argc, char *argv[])
 
         prof.Stop();
 
-        CTestWidget tw;
-        tw.show();
+//        CTestWidget tw;
+//        tw.show();
         return program.exec();
 
     } catch (const char *error) {

@@ -1331,7 +1331,7 @@ void OBSBasic::OBSInit()
 
 #ifdef _WIN32
     SetWin32DropStyle(this);
-//    show();
+    show();
 #endif
 
     bool alwaysOnTop = config_get_bool(App()->GlobalConfig(), "BasicWindow",
@@ -1342,7 +1342,7 @@ void OBSBasic::OBSInit()
     }
 
 #ifndef _WIN32
-//    show();
+    show();
 #endif
 
     QList<int> defSizes;
@@ -5337,7 +5337,7 @@ void OBSBasic::SystemTray(bool firstStarted)
         trayIcon->hide();
     } else if ((sysTrayWhenStarted && sysTrayEnabled)
             || opt_minimize_tray) {
-        trayIcon->show();
+//        trayIcon->show();
         if (firstStarted) {
             QTimer::singleShot(50, this, SLOT(hide()));
             EnablePreviewDisplay(false);
@@ -5345,7 +5345,7 @@ void OBSBasic::SystemTray(bool firstStarted)
             opt_minimize_tray = false;
         }
     } else if (sysTrayEnabled) {
-        trayIcon->show();
+//        trayIcon->show();
     } else if (!sysTrayEnabled) {
         trayIcon->hide();
     } else if (!sysTrayWhenStarted && sysTrayEnabled) {
