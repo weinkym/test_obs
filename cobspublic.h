@@ -19,6 +19,8 @@
 #define DL_D3D11 "libd3d11.dll"
 #endif
 
+#define DEFAULT_LANG "en-US"
+
 struct OutputParam
 {
     obs_sceneitem_crop crop;

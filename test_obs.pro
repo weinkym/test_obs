@@ -19,8 +19,14 @@ include(./obs/obs.pri)
 
 FORMS += ctestwidget.ui
 
-HEADERS += ctestwidget.h
+HEADERS += ctestwidget.h \
+    cobsbasic.h \
+    cbasicoutputhandler.h \
+    cobsglobal.h
 
 SOURCES += ctestwidget.cpp \
-  main.cpp
+  main.cpp \
+    cobsbasic.cpp \
+    cbasicoutputhandler.cpp \
+    cobsglobal.cpp
 
