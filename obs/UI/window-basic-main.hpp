@@ -640,6 +640,9 @@ public:
     virtual int GetProfilePath(char *path, size_t size, const char *file)
         const override;
 
+    //================
+    void setOutputCrop(const QRect &rect);
+
 private:
     std::unique_ptr<Ui::OBSBasic> ui;
 };

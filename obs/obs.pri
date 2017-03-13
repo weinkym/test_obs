@@ -1,5 +1,5 @@
 
-C_OBS_ROOT=E:\\bitbrothers\\obs-studio
+C_OBS_ROOT=C:\\bitbrothers\\obs-studio
 
 C_RELEASE_DEBUG=debug
 INCLUDEPATH +=$${C_OBS_ROOT}/libobs

@@ -15,6 +15,9 @@ public:
     explicit CTestWidget(QWidget *parent = 0);
     ~CTestWidget();
 
+private slots:
+    void on_btnStart_clicked();
+
 private:
     Ui::CTestWidget *ui;
 };

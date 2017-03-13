@@ -19,6 +19,11 @@
 #define DL_D3D11 "libd3d11.dll"
 #endif
 
+struct OutputParam
+{
+    obs_sceneitem_crop crop;
+    struct vec2 bounds;
+};
 
 profiler_name_store_t* doInit();
 #endif // COBSPUBLIC_H

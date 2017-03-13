@@ -895,8 +895,8 @@ bool OBSApp::OBSInit()
 
         mainWindow = new OBSBasic();
 
-        mainWindow->setAttribute(Qt::WA_DeleteOnClose, true);
-        connect(mainWindow, SIGNAL(destroyed()), this, SLOT(quit()));
+//        mainWindow->setAttribute(Qt::WA_DeleteOnClose, true);
+//        connect(mainWindow, SIGNAL(destroyed()), this, SLOT(quit()));
 
         mainWindow->OBSInit();
 
@@ -1284,8 +1284,8 @@ static int run_program(fstream &logFile, int argc, char *argv[])
 
         prof.Stop();
 
-//        CTestWidget tw;
-//        tw.show();
+        CTestWidget tw;
+        tw.show();
         return program.exec();
 
     } catch (const char *error) {

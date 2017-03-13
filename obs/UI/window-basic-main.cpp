@@ -1331,7 +1331,7 @@ void OBSBasic::OBSInit()
 
 #ifdef _WIN32
     SetWin32DropStyle(this);
-    show();
+    //show();
 #endif
 
     bool alwaysOnTop = config_get_bool(App()->GlobalConfig(), "BasicWindow",
@@ -1342,7 +1342,7 @@ void OBSBasic::OBSInit()
     }
 
 #ifndef _WIN32
-    show();
+    //show();
 #endif
 
     QList<int> defSizes;
@@ -2534,8 +2534,6 @@ void OBSBasic::doTest()
             data.visible = true;
             obs_scene_atomic_update(scene, AddSource0, &data);
 
-
-
             auto func = [](obs_scene_t *scene, obs_sceneitem_t *item, void *param)
             {
                 OBSBasic *main = static_cast<OBSBasic*>(param);
@@ -2546,10 +2544,10 @@ void OBSBasic::doTest()
 
 //                obs_sceneitem_defer_update_begin(item);
                 obs_sceneitem_crop crop;
-                crop.bottom = 600;
+                crop.bottom = cy - 600;
                 crop.left = 0;
                 crop.top=0;
-                crop.right=1200;
+                crop.right=cx - 600;
 //                obs_sceneitem_set_crop(item, &crop);
                 obs_transform_info info;
                 obs_sceneitem_get_info(item,&info);
@@ -5127,6 +5125,45 @@ int OBSBasic::GetProfilePath(char *path, size_t size, const char *file) const
         return snprintf(path, size, "%s/%s", profiles_path, profile);
 
     return snprintf(path, size, "%s/%s/%s", profiles_path, profile, file);
+}
+
+void OBSBasic::setOutputCrop(const QRect &rect)
+{
+
+    this->show();
+    OutputParam param;
+    uint64_t cx     = config_get_uint(this->Config(),  "Video", "BaseCX");
+    uint64_t cy       = config_get_uint(this->Config(), "Video", "BaseCY");
+    param.crop.bottom = cy - rect.bottom();
+    param.crop.left = rect.x();
+    param.crop.top = rect.y();
+    param.crop.right=cx - rect.right();
+
+    vec2_set(&(param.bounds),cx,cy);
+
+    //TODO 待完善
+    auto func = [](obs_scene_t *scene, obs_sceneitem_t *item, void *param)
+    {
+
+        OutputParam *outputParam = static_cast<OutputParam*>(param);
+      //  if (!obs_sceneitem_selected(item))
+         //   return true;
+        obs_transform_info info;
+        obs_sceneitem_get_info(item,&info);
+        info.bounds = outputParam->bounds;
+        info.bounds_type = OBS_BOUNDS_STRETCH;
+        obs_sceneitem_defer_update_begin(item);
+         obs_sceneitem_set_info(item,&info);
+         obs_sceneitem_set_crop(item, &(outputParam->crop));
+        obs_sceneitem_defer_update_end(item);
+
+        UNUSED_PARAMETER(scene);
+        UNUSED_PARAMETER(param);
+        return true;
+    };
+    OBSScene     scene = GetCurrentScene();
+
+    obs_scene_enum_items(scene,func,&param);
 }
 
 void OBSBasic::on_toggleSceneTransitions_toggled(bool visible)
